@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Fetal Health Prediction System{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1><i class="fas fa-heartbeat"></i> Fetal Health Prediction System</h1>
+        <p class="hero-subtitle">AI-powered fetal health assessment with 95.92% accuracy</p>
+        <p class="hero-description">
+            Advanced machine learning system for predicting fetal health conditions using 8 key medical parameters.
+            Provides instant classifications with confidence scores to support clinical decision-making.
+        </p>
+        
+        <div class="cta-buttons">
+            <a href="{{ url_for('form') }}" class="btn btn-primary">
+                <i class="fas fa-clipboard-check"></i> Start Prediction
+            </a>
+            <a href="/agent" class="btn btn-secondary">
+                <i class="fas fa-robot"></i> Chat with AI Agent
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2>System Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>High Accuracy</h3>
+                <p>95.92% prediction accuracy using Random Forest machine learning algorithm trained on 2,126 medical records.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h3>Three Classifications</h3>
+                <p>Predicts NORMAL, SUSPECT, or PATHOLOGICAL fetal health conditions with detailed confidence scores.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Confidence Scoring</h3>
+                <p>Provides probability estimates for each classification to help assess prediction reliability.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI Agent</h3>
+                <p>Intelligent chat interface for natural language interaction and guided medical data analysis.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Input Validation</h3>
+                <p>Comprehensive data validation with range checking and helpful error messages for medical parameters.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>API Ready</h3>
+                <p>RESTful API endpoints for easy integration with existing hospital information systems.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="medical-info-section">
+    <div class="container">
+        <h2>Medical Parameters</h2>
+        <p>The system analyzes 8 key fetal health indicators:</p>
+        
+        <div class="parameters-grid">
+            <div class="parameter-item">
+                <strong>Prolonged Decelerations</strong>
+                <span>Heart rate drops during contractions</span>
+            </div>
+            <div class="parameter-item">
+                <strong>Short Term Variability</strong>
+                <span>Beat-to-beat heart rate changes</span>
+            </div>
+            <div class="parameter-item">
+                <strong>Long Term Variability</strong>
+                <span>Longer-term heart rate patterns</span>
+            </div>
+            <div class="parameter-item">
+                <strong>Histogram Analysis</strong>
+                <span>Statistical analysis of heart rate distribution</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="classifications-section">
+    <div class="container">
+        <h2>Health Classifications</h2>
+        <div class="classifications-grid">
+            <div class="classification-card normal">
+                <div class="classification-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>NORMAL</h3>
+                <p>Healthy fetal condition with no immediate concerns. Regular monitoring is sufficient.</p>
+            </div>
+            
+            <div class="classification-card suspect">
+                <div class="classification-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>SUSPECT</h3>
+                <p>Requires medical attention and close monitoring. Clinical evaluation recommended.</p>
+            </div>
+            
+            <div class="classification-card pathological">
+                <div class="classification-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h3>PATHOLOGICAL</h3>
+                <p>Urgent medical intervention required. High-risk situation needing immediate attention.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

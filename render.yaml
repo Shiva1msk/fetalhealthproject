@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: fetal-health-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /health
+    
+  - type: web
+    name: fetal-health-agent
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn agent_app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /health

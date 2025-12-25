@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result - Fetal Health System{% endblock %}
+
+{% block content %}
+<div class="result-section">
+    <div class="container">
+        <div class="result-header">
+            <h1><i class="fas fa-chart-line"></i> Prediction Result</h1>
+        </div>
+
+        <div class="result-card {{ prediction.lower() }}">
+            <div class="result-main">
+                <div class="result-icon">
+                    {% if prediction == 'NORMAL' %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif prediction == 'SUSPECT' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% else %}
+                        <i class="fas fa-exclamation-circle"></i>
+                    {% endif %}
+                </div>
+                <div class="result-content">
+                    <h2>{{ prediction }}</h2>
+                    <p class="result-description">
+                        {% if prediction == 'NORMAL' %}
+                            Healthy fetal condition detected. No immediate concerns identified.
+                        {% elif prediction == 'SUSPECT' %}
+                            Suspect fetal condition detected. Medical attention and monitoring recommended.
+                        {% else %}
+                            Pathological condition detected. Urgent medical intervention required.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            {% if confidence %}
+            <div class="confidence-section">
+                <h3><i class="fas fa-percentage"></i> Confidence Scores</h3>
+                <div class="confidence-bars">
+                    {% for label, score in confidence.items() %}
+                    <div class="confidence-item">
+                        <div class="confidence-label">
+                            <span class="label-name">{{ label }}</span>
+                            <span class="label-score">{{ "%.1f"|format(score * 100) }}%</span>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill {{ label.lower() }}" 
+                                 style="width: {{ score * 100 }}%"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="recommendations-section">
+            <h3><i class="fas fa-stethoscope"></i> Clinical Recommendations</h3>
+            <div class="recommendations-content">
+                {% if prediction == 'NORMAL' %}
+                <div class="recommendation normal">
+                    <i class="fas fa-check"></i>
+                    <div>
+                        <strong>Continue Regular Monitoring</strong>
+                        <p>Maintain standard prenatal care schedule. No immediate intervention required.</p>
+                    </div>
+                </div>
+                <div class="recommendation normal">
+                    <i class="fas fa-calendar-check"></i>
+                    <div>
+                        <strong>Routine Follow-up</strong>
+                        <p>Schedule next routine appointment as per standard protocol.</p>
+                    </div>
+                </div>
+                {% elif prediction == 'SUSPECT' %}
+                <div class="recommendation suspect">
+                    <i class="fas fa-eye"></i>
+                    <div>
+                        <strong>Increased Monitoring</strong>
+                        <p>Implement more frequent fetal heart rate monitoring and clinical assessments.</p>
+                    </div>
+                </div>
+                <div class="recommendation suspect">
+                    <i class="fas fa-user-md"></i>
+                    <div>
+                        <strong>Clinical Evaluation</strong>
+                        <p>Schedule comprehensive obstetric evaluation within 24-48 hours.</p>
+                    </div>
+                </div>
+                <div class="recommendation suspect">
+                    <i class="fas fa-notes-medical"></i>
+                    <div>
+                        <strong>Document Findings</strong>
+                        <p>Record all observations and consider additional diagnostic tests.</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="recommendation pathological">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Immediate Assessment</strong>
+                        <p>Urgent obstetric evaluation required. Consider immediate delivery if indicated.</p>
+                    </div>
+                </div>
+                <div class="recommendation pathological">
+                    <i class="fas fa-heartbeat"></i>
+                    <div>
+                        <strong>Continuous Monitoring</strong>
+                        <p>Implement continuous fetal heart rate monitoring and maternal assessment.</p>
+                    </div>
+                </div>
+                <div class="recommendation pathological">
+                    <i class="fas fa-ambulance"></i>
+                    <div>
+                        <strong>Emergency Protocols</strong>
+                        <p>Activate emergency obstetric protocols. Prepare for potential emergency delivery.</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="input-summary">
+            <h3><i class="fas fa-list"></i> Input Parameters</h3>
+            <div class="input-grid">
+                {% for key, value in input_data.items() %}
+                <div class="input-item">
+                    <span class="input-label">{{ key.replace('_', ' ').title() }}:</span>
+                    <span class="input-value">{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="actions-section">
+            <a href="{{ url_for('form') }}" class="btn btn-primary">
+                <i class="fas fa-redo"></i> New Prediction
+            </a>
+            <button onclick="window.print()" class="btn btn-secondary">
+                <i class="fas fa-print"></i> Print Result
+            </button>
+            <a href="/agent" class="btn btn-secondary">
+                <i class="fas fa-robot"></i> Ask AI Agent
+            </a>
+        </div>
+
+        <div class="disclaimer-section">
+            <div class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Medical Disclaimer:</strong> This prediction is for clinical decision support only. 
+                Always combine AI predictions with professional medical judgment and current clinical protocols. 
+                This system should not replace comprehensive medical evaluation.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

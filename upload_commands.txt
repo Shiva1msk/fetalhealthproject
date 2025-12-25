@@ -1,0 +1,39 @@
+# Commands to Upload Fetal Health System to GitHub
+# Repository: https://github.com/Shiva1msk/fetalhealthproject.git
+
+# Step 1: Navigate to project directory
+cd fetal-health-system
+
+# Step 2: Initialize Git repository
+git init
+
+# Step 3: Add all files
+git add .
+
+# Step 4: Create initial commit
+git commit -m "Initial commit: Complete Fetal Health Prediction System v1.0.0
+
+- AI-powered fetal health prediction with 95.92% accuracy
+- Web interface with form-based input  
+- AI agent with natural language processing
+- RESTful API endpoints
+- Docker containerization support
+- Comprehensive test suite
+- Multi-platform deployment configurations
+- Complete documentation and guides"
+
+# Step 5: Add remote repository
+git remote add origin https://github.com/Shiva1msk/fetalhealthproject.git
+
+# Step 6: Set main branch
+git branch -M main
+
+# Step 7: Push to GitHub
+git push -u origin main
+
+# If the repository already has content and you get an error, use:
+# git push -f origin main
+
+# Alternative: If you want to pull existing content first
+# git pull origin main --allow-unrelated-histories
+# git push -u origin main

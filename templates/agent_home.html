@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetal Health AI Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="agent-home">
+        <div class="agent-hero">
+            <div class="agent-hero-content">
+                <h1><i class="fas fa-robot"></i> Fetal Health AI Agent</h1>
+                <p class="agent-subtitle">Intelligent assistant for fetal health predictions and medical data analysis</p>
+                <p class="agent-description">
+                    Chat with our AI agent to get predictions, understand medical parameters, 
+                    and receive guidance on fetal health assessments with natural language interaction.
+                </p>
+            </div>
+        </div>
+        
+        <div class="agent-features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Natural Language Chat</h3>
+                        <p>Interact with the agent using simple commands and natural language queries.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Smart Predictions</h3>
+                        <p>Get accurate fetal health predictions with detailed confidence scores and explanations.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <h3>Data Validation</h3>
+                        <p>Automatic validation of medical parameters with helpful error messages and guidance.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-medical"></i>
+                        </div>
+                        <h3>Medical Guidance</h3>
+                        <p>Access sample data, parameter information, and example cases for each classification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="agent-commands">
+            <div class="container">
+                <h2><i class="fas fa-terminal"></i> Available Commands</h2>
+                <div class="commands-grid">
+                    <div class="command-item">
+                        <code>"help"</code>
+                        <p>Show all available commands and usage instructions</p>
+                    </div>
+                    <div class="command-item">
+                        <code>"sample"</code>
+                        <p>Get sample input data format for predictions</p>
+                    </div>
+                    <div class="command-item">
+                        <code>"features"</code>
+                        <p>Learn about medical parameters and their ranges</p>
+                    </div>
+                    <div class="command-item">
+                        <code>"sample cases"</code>
+                        <p>View example cases for NORMAL, SUSPECT, and PATHOLOGICAL</p>
+                    </div>
+                    <div class="command-item">
+                        <code>"predict"</code>
+                        <p>Make a prediction (requires medical data)</p>
+                    </div>
+                    <div class="command-item">
+                        <code>"accuracy"</code>
+                        <p>View model performance and validation details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="agent-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to start?</h2>
+                    <p>Begin chatting with the AI agent for intelligent fetal health analysis</p>
+                    <div class="cta-buttons">
+                        <a href="{{ url_for('agent_interface') }}" class="btn btn-primary btn-large">
+                            <i class="fas fa-comments"></i> Start Chatting
+                        </a>
+                        <a href="/" class="btn btn-secondary">
+                            <i class="fas fa-clipboard-check"></i> Direct Prediction
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="agent-info">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3><i class="fas fa-chart-line"></i> High Accuracy</h3>
+                        <p>95.92% prediction accuracy using advanced Random Forest machine learning</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-clock"></i> Instant Results</h3>
+                        <p>Get immediate predictions and explanations in real-time chat interface</p>
+                    </div>
+                    <div class="info-item">
+                        <h3><i class="fas fa-user-md"></i> Clinical Support</h3>
+                        <p>Designed for healthcare professionals as a clinical decision support tool</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Fetal Health AI Agent | 95.92% Accuracy | For Clinical Decision Support</p>
+            <p class="disclaimer">⚠️ This system is for medical decision support only. Always combine with professional clinical judgment.</p>
+        </div>
+    </footer>
+</body>
+</html>

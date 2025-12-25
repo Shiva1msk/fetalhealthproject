@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Form - Fetal Health System{% endblock %}
+
+{% block content %}
+<div class="form-section">
+    <div class="container">
+        <div class="form-header">
+            <h1><i class="fas fa-clipboard-check"></i> Fetal Health Prediction</h1>
+            <p>Enter the medical parameters below to get an AI-powered fetal health assessment.</p>
+        </div>
+
+        <form action="{{ url_for('predict') }}" method="post" class="prediction-form" id="predictionForm">
+            <div class="form-grid">
+                {% for feature in features %}
+                <div class="form-group">
+                    <label for="{{ feature }}">
+                        {{ feature.replace('_', ' ').title() }}
+                        <span class="range-info">
+                            ({{ ranges[feature][0] }} - {{ ranges[feature][1] }})
+                        </span>
+                    </label>
+                    <input 
+                        type="number" 
+                        id="{{ feature }}" 
+                        name="{{ feature }}" 
+                        step="0.001"
+                        min="{{ ranges[feature][0] }}"
+                        max="{{ ranges[feature][1] }}"
+                        required
+                        class="form-input"
+                        placeholder="Enter value between {{ ranges[feature][0] }} and {{ ranges[feature][1] }}"
+                    >
+                    <div class="input-help" id="{{ feature }}_help"></div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="loadSampleData()">
+                    <i class="fas fa-flask"></i> Load Sample Data
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                    <i class="fas fa-eraser"></i> Clear Form
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-brain"></i> Predict Health Status
+                </button>
+            </div>
+        </form>
+
+        <div class="help-section">
+            <h3><i class="fas fa-info-circle"></i> Parameter Information</h3>
+            <div class="help-grid">
+                <div class="help-item">
+                    <strong>Prolonged Decelerations:</strong>
+                    <p>Measures heart rate drops during uterine contractions. Lower values are better.</p>
+                </div>
+                <div class="help-item">
+                    <strong>Abnormal Short Term Variability:</strong>
+                    <p>Most important parameter. Extreme values (very low or very high) indicate problems.</p>
+                </div>
+                <div class="help-item">
+                    <strong>Long Term Variability:</strong>
+                    <p>Percentage of time with abnormal patterns. High values are concerning.</p>
+                </div>
+                <div class="help-item">
+                    <strong>Histogram Parameters:</strong>
+                    <p>Statistical measures of heart rate distribution. Normal range around 140-160 bpm.</p>
+                </div>
+                <div class="help-item">
+                    <strong>Accelerations:</strong>
+                    <p>Heart rate increases indicating healthy fetal responses. Higher values are better.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function loadSampleData() {
+    const sampleData = {
+        'prolongued_decelerations': 0.002,
+        'abnormal_short_term_variability': 50.0,
+        'percentage_abnormal_long_term_variability': 45.0,
+        'histogram_variance': 134.0,
+        'histogram_median': 130.0,
+        'mean_long_term_variability': 25.0,
+        'histogram_mode': 120.0,
+        'accelerations': 0.01
+    };
+    
+    for (const [key, value] of Object.entries(sampleData)) {
+        const input = document.getElementById(key);
+        if (input) {
+            input.value = value;
+        }
+    }
+    
+    showNotification('Sample data loaded successfully!', 'success');
+}
+
+function clearForm() {
+    document.getElementById('predictionForm').reset();
+    showNotification('Form cleared', 'info');
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Form validation
+document.getElementById('predictionForm').addEventListener('submit', function(e) {
+    const inputs = this.querySelectorAll('input[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        const value = parseFloat(input.value);
+        const min = parseFloat(input.min);
+        const max = parseFloat(input.max);
+        
+        if (isNaN(value) || value < min || value > max) {
+            input.classList.add('error');
+            isValid = false;
+        } else {
+            input.classList.remove('error');
+        }
+    });
+    
+    if (!isValid) {
+        e.preventDefault();
+        showNotification('Please check all input values are within valid ranges', 'error');
+    }
+});
+</script>
+{% endblock %}
